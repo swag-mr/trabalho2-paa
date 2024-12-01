@@ -95,25 +95,25 @@ void imprimir_resultado_mochila_fracionaria(Resultado** resultado, int n){
     printf("\nValor final: %.2f\n", valor_final);
 }
 
-int main(){
-    int W = 50;
-    int N = 3;
-    
-    Item** arr = (Item**)malloc(sizeof(Item*)*N);
-    for(int i=0; i < N; i++){
-        arr[i] = (Item*)malloc(sizeof(Item));
-    }
-
-    arr[0]->valor = 60;
-    arr[0]->peso = 10; 
-
-    arr[1]->valor = 100;
-    arr[1]->peso = 20; 
-
-    arr[2]->valor = 120;
-    arr[2]->peso = 30; 
-
-    Resultado** resultado = mochila_fracionaria(W, arr, N);
-    imprimir_resultado_mochila_fracionaria(resultado, N);
-    return 0;
-}
+/* int main(){ */
+/*     int W = 50; */
+/*     int N = 3; */
+/*      */
+/*     Item** arr = (Item**)malloc(sizeof(Item*)*N); */
+/*     for(int i=0; i < N; i++){ */
+/*         arr[i] = (Item*)malloc(sizeof(Item)); */
+/*     } */
+/*  */
+/*     arr[0]->valor = 60; */
+/*     arr[0]->peso = 10;  */
+/*  */
+/*     arr[1]->valor = 100; */
+/*     arr[1]->peso = 20;  */
+/*  */
+/*     arr[2]->valor = 120; */
+/*     arr[2]->peso = 30;  */
+/*  */
+/*     Resultado** resultado = mochila_fracionaria(W, arr, N); */
+/*     imprimir_resultado_mochila_fracionaria(resultado, N); */
+/*     return 0; */
+/* } */

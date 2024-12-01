@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "lcs.h"
 
-int max(int a, int b) {
+int maxLCS(int a, int b) {
     return (a > b) ? a : b;
 }
 
@@ -14,7 +14,7 @@ int tam_lcs(char *s1, char *s2, int m, int n){
     if(s1[m-1] == s2[n-1])
         return 1 + tam_lcs(s1, s2, m - 1, n - 1);
     else
-        return max(tam_lcs(s1, s2, m, n - 1), tam_lcs(s1, s2, m - 1, n));
+        return maxLCS(tam_lcs(s1, s2, m, n - 1), tam_lcs(s1, s2, m - 1, n));
 }
 
 int proxy_tam_lcs(char* s1, char* s2){
@@ -97,10 +97,10 @@ void print_tabela(Cell** tabela, int m, int n){
     }
 }
 
-int main(){
-    char *s1 = (char*)malloc(sizeof(char)*MAX);
-    char *s2 = (char*)malloc(sizeof(char)*MAX);
-    int res = 0;
+/* int main(){ */
+/*     char *s1 = (char*)malloc(sizeof(char)*MAX); */
+/*     char *s2 = (char*)malloc(sizeof(char)*MAX); */
+/*     int res = 0; */
 
 /*
     printf("Digite a primeira sequência de caracteres: ");
@@ -113,9 +113,9 @@ int main(){
 
     printf("Tamanho da maior subsequência: %d\n", res);
 */
-    char* s3 = "ABCBDAB";
-    char* s4 = "BDCABA";
-
-    proxy_print_lcs(s3, s4);
-    return 0;
-}
+/*     char* s3 = "ABCBDAB"; */
+/*     char* s4 = "BDCABA"; */
+/*  */
+/*     proxy_print_lcs(s3, s4); */
+/*     return 0; */
+/* } */

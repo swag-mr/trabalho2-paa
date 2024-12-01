@@ -118,49 +118,48 @@ void codificarHuffman(char caracteres[], int frequencias[], int tamanho, char* t
     imprimirCodigos(raiz, arr, topo, tabela);
 }
 
-int main() {
-    char texto[MAX_CHARS];
-    int frequencias[MAX_CHARS] = {0};
-
-    printf("Digite um texto: ");
-    fgets(texto, MAX_CHARS, stdin);
-
-    int n = strlen(texto) - 1;
-    for (int i = 0; i < n; i++)
-        frequencias[(unsigned char)texto[i]]++;
-
-    char caracteres[MAX_CHARS];
-    int freq[MAX_CHARS], index = 0;
-
-    for (int i = 0; i < MAX_CHARS; i++) {
-        if (frequencias[i] > 0) {
-            caracteres[index] = (char)i;
-            freq[index] = frequencias[i];
-            index++;
-        }
-    }
-    printf("\nCódigos de Huffman:\n");
-    char* tabela[MAX_CHARS] = {0};
-    codificarHuffman(caracteres, freq, index, tabela);
-
-    printf("\nTexto codificado: ");
-    for (int i = 0; i < n; i++) {
-        printf("%s", tabela[(unsigned char)texto[i]]);
-    }
-    printf("\n");
-
-    printf("\nTamanho da string não comprimida (em bits): %d\n", 8 * n);
-
-    int tamanho_codificado = 0;
-    for (int i = 0; i < n; i++) {
-        tamanho_codificado += strlen(tabela[(unsigned char)texto[i]]);
-    }
-    printf("\nTamanho da string comprimida (em bits): %d\n", tamanho_codificado);
-
-    double taxa_compressao = ((double)tamanho_codificado / (8.0 * n)) * 100.0;
-    double taxa_reducao = 100.0 - taxa_compressao;
-    printf("\nTaxa de redução (em %%): %.2f\n", taxa_reducao);
-
-    return 0;
-}
-
+/* int main() { */
+/*     char texto[MAX_CHARS]; */
+/*     int frequencias[MAX_CHARS] = {0}; */
+/*  */
+/*     printf("Digite um texto: "); */
+/*     fgets(texto, MAX_CHARS, stdin); */
+/*  */
+/*     int n = strlen(texto) - 1; */
+/*     for (int i = 0; i < n; i++) */
+/*         frequencias[(unsigned char)texto[i]]++; */
+/*  */
+/*     char caracteres[MAX_CHARS]; */
+/*     int freq[MAX_CHARS], index = 0; */
+/*  */
+/*     for (int i = 0; i < MAX_CHARS; i++) { */
+/*         if (frequencias[i] > 0) { */
+/*             caracteres[index] = (char)i; */
+/*             freq[index] = frequencias[i]; */
+/*             index++; */
+/*         } */
+/*     } */
+/*     printf("\nCódigos de Huffman:\n"); */
+/*     char* tabela[MAX_CHARS] = {0}; */
+/*     codificarHuffman(caracteres, freq, index, tabela); */
+/*  */
+/*     printf("\nTexto codificado: "); */
+/*     for (int i = 0; i < n; i++) { */
+/*         printf("%s", tabela[(unsigned char)texto[i]]); */
+/*     } */
+/*     printf("\n"); */
+/*  */
+/*     printf("\nTamanho da string não comprimida (em bits): %d\n", 8 * n); */
+/*  */
+/*     int tamanho_codificado = 0; */
+/*     for (int i = 0; i < n; i++) { */
+/*         tamanho_codificado += strlen(tabela[(unsigned char)texto[i]]); */
+/*     } */
+/*     printf("\nTamanho da string comprimida (em bits): %d\n", tamanho_codificado); */
+/*  */
+/*     double taxa_compressao = ((double)tamanho_codificado / (8.0 * n)) * 100.0; */
+/*     double taxa_reducao = 100.0 - taxa_compressao; */
+/*     printf("\nTaxa de redução (em %%): %.2f\n", taxa_reducao); */
+/*  */
+/*     return 0; */
+/* } */

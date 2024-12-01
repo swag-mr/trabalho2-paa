@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "mochila_booleana.h"
 
-int max(int a, int b) {
+int maxBooleana(int a, int b) {
     return (a > b) ? a : b;
 }
 
@@ -25,7 +25,7 @@ int** tabela_mochila(int capacidade, int* pesos, int* valores, int n){
             if(i == 0 || w == 0){
                 tabela[i][w] = 0;
             }else if(pesos[i-1] <= w){
-                tabela[i][w] = max(valores[i-1] + tabela[i-1][w-pesos[i-1]], tabela[i-1][w]);
+                tabela[i][w] = maxBooleana(valores[i-1] + tabela[i-1][w-pesos[i-1]], tabela[i-1][w]);
             }else{
                 tabela[i][w] = tabela[i-1][w];
             }
@@ -53,15 +53,15 @@ int maior_valor_mochila(int **tabela, int capacidade, int* pesos, int* valores, 
     return maior;
 }
 
-int main(){
-    int weight[] = { 6, 5, 8, 2, 3, 1 };
-    int profit[] = { 11, 9, 18, 6, 7, 3};
-    int W = 15;
-    int n = sizeof(profit) / sizeof(profit[0]);
-    
-    int** tabela = tabela_mochila(W, weight, profit, n);
-
-    itens_usados(tabela, W, weight, profit, n);
-    printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, weight, profit, n));
-    return 0;
-}
+/* int main(){ */
+/*     int weight[] = { 6, 5, 8, 2, 3, 1 }; */
+/*     int profit[] = { 11, 9, 18, 6, 7, 3}; */
+/*     int W = 15; */
+/*     int n = sizeof(profit) / sizeof(profit[0]); */
+/*      */
+/*     int** tabela = tabela_mochila(W, weight, profit, n); */
+/*  */
+/*     itens_usados(tabela, W, weight, profit, n); */
+/*     printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, weight, profit, n)); */
+/*     return 0; */
+/* } */
