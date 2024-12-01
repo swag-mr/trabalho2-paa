@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mochila_booleana.h"
-
-int maxBooleana(int a, int b) {
-    return (a > b) ? a : b;
-}
+#include "util.h"
 
 void destruir_matriz(int** matriz, int n){
     for(int i=0; i < n; i++){
@@ -25,7 +22,7 @@ int** tabela_mochila(int capacidade, int* pesos, int* valores, int n){
             if(i == 0 || w == 0){
                 tabela[i][w] = 0;
             }else if(pesos[i-1] <= w){
-                tabela[i][w] = maxBooleana(valores[i-1] + tabela[i-1][w-pesos[i-1]], tabela[i-1][w]);
+                tabela[i][w] = max(valores[i-1] + tabela[i-1][w-pesos[i-1]], tabela[i-1][w]);
             }else{
                 tabela[i][w] = tabela[i-1][w];
             }

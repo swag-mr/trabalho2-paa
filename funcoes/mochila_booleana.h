@@ -1,8 +1,6 @@
 #ifndef MOCHILA_BOOLEANA_H
 #define MOCHILA_BOOLEANA_H
 
-int maxBooleana(int a, int b);
-
 void destruir_matriz(int** matriz, int n);
 
 int** tabela_mochila(int capacidade, int* pesos, int* valores, int n);

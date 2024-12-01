@@ -8,8 +8,6 @@ typedef struct cell{
     char dir; // (-) aponta para esq; (|) aponta para cima; (\) aponta esq+cima
 } Cell;
 
-int maxLCS(int a, int b);
-
 int tam_lcs(char *s1, char *s2, int m, int n);
 
 int proxy_tam_lcs(char* s1, char* s2);
