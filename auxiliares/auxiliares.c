@@ -16,7 +16,7 @@ void menuAssignmentProblem(){
     printf("\n======== MENU ASSIGNMENT PROBLEM ========\n\n");
     printf("1 - Executar teste com matriz pré-programada\n");
     printf("2 - Ler matriz\n");
-    printf("0 - Sair\n");
+    printf("0 - Voltar\n");
 
     printf("\nSelecione a opção desejada: ");
 }
