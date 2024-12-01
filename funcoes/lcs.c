@@ -93,26 +93,3 @@ void print_tabela(Cell** tabela, int m, int n){
         printf("\n");
     }
 }
-
-/* int main(){ */
-/*     char *s1 = (char*)malloc(sizeof(char)*MAX); */
-/*     char *s2 = (char*)malloc(sizeof(char)*MAX); */
-/*     int res = 0; */
-
-/*
-    printf("Digite a primeira sequência de caracteres: ");
-    gets(s1);
-
-    printf("Digite a segunda sequência de caracteres: ");
-    gets(s2);
-
-    res = proxy_lcs(s1, s2);
-
-    printf("Tamanho da maior subsequência: %d\n", res);
-*/
-/*     char* s3 = "ABCBDAB"; */
-/*     char* s4 = "BDCABA"; */
-/*  */
-/*     proxy_print_lcs(s3, s4); */
-/*     return 0; */
-/* } */

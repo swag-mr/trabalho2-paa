@@ -142,6 +142,13 @@ int main(int argc, char* argv[]){
         }
         if(strcmp(argv[1], "teste_lcs") == 0){
             //teste longest common subsequence
+            char* s3 = "ABCBDAB";
+            char* s4 = "BDCABA";
+
+            printf("Strings: '%s' e '%s'\n", s3, s4);
+            printf("Maior subsequência comum: ");
+            proxy_print_lcs(s3, s4);
+            printf("\n");
 
             return 0;
         }
@@ -158,7 +165,7 @@ int main(int argc, char* argv[]){
 
                 // Ler matriz
                 int n;
-                printf("Digite o tamanho N da matriz (NxN): ");
+                printf("\nDigite o tamanho N da matriz (NxN): ");
                 scanf("%d", &n);
 
                 int **matriz = (int**) malloc(n * sizeof(int*));
@@ -209,7 +216,7 @@ int main(int argc, char* argv[]){
                 char texto[MAX_CHARS];
                 int frequencias[MAX_CHARS] = {0};
 
-                printf("Digite um texto: ");
+                printf("\nDigite um texto: ");
                 fgets(texto, MAX_CHARS, stdin);
 
                 int n = strlen(texto) - 1;
@@ -261,7 +268,7 @@ int main(int argc, char* argv[]){
                 // Knapsack Problem
                 int n, W;
 
-                printf("Digite o número de itens: ");
+                printf("\nDigite o número de itens: ");
                 scanf("%d", &n);
 
                 int* weight = (int*)malloc(n * sizeof(int));
@@ -295,6 +302,22 @@ int main(int argc, char* argv[]){
             }
             case 5: {
                 // Longest Common Subsequence
+
+                getchar();
+                char s1[MAX];
+                char s2[MAX];
+
+                printf("\nDigite a primeira sequência de caracteres: ");
+                fgets(s1, MAX, stdin);
+                s1[strcspn(s1, "\n")] = '\0'; // Remove o \n do final
+
+                printf("Digite a segunda sequência de caracteres: ");
+                fgets(s2, MAX, stdin);
+                s2[strcspn(s2, "\n")] = '\0';
+
+                printf("\nMaior subsequência comum: ");
+                proxy_print_lcs(s1, s2);
+                printf("\n");
                 break;
             }
             case 0: {
