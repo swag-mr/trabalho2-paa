@@ -3,8 +3,4 @@
 
 void menuPrincipal();
 
-void menuAssignmentProblem();
-
-void menuHuffman();
-
 #endif
