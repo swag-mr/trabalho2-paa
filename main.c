@@ -111,37 +111,59 @@ int main(int argc, char* argv[]){
         if(strcmp(argv[1], "teste_fractional_knapsack") == 0){
             //teste fractional knapsack problem
 
+            int W = 50;
+            int N = 3;
+
+            Item** arr = (Item**)malloc(sizeof(Item*) * N);
+            for (int i = 0; i < N; i++) {
+                arr[i] = (Item*)malloc(sizeof(Item));
+            }
+
+            arr[0]->valor = 60;
+            arr[0]->peso = 10; 
+            arr[1]->valor = 100;
+            arr[1]->peso = 20; 
+            arr[2]->valor = 120;
+            arr[2]->peso = 30; 
+
+            printf("\nCapacidade da mochila: %d\n", W);
+            printf("Quantidade de itens: %d\n", N);
+            for(int i=0; i < N; i++){
+                printf("Valor do item %d: %d\n", i+1, arr[i]->valor);
+                printf("Peso do item %d: %d\n", i+1, arr[i]->peso);
+            }
+            printf("\n");
+
+            Resultado** resultado = mochila_fracionaria(W, arr, N);
+            imprimir_resultado_mochila_fracionaria(resultado, N);
+
             return 0;
         }
         if(strcmp(argv[1], "teste_knapsack") == 0){
             //teste knapsack problem
-            int weight[] = { 6, 5, 8, 2, 3, 1 };
-            int profit[] = { 11, 9, 18, 6, 7, 3};
+
+            Item itens[] = { {11, 6}, {9, 5}, {18, 8}, {6, 2}, {7, 3}, {3, 1} };
             int W = 15;
-            int n = sizeof(profit) / sizeof(profit[0]);
+            int n = sizeof(itens) / sizeof(itens[0]);
             
             printf("\nCapacidade da mochila: %d\n", W);
             printf("Quantidade de itens: %d\n", n);
-            printf("Peso dos itens: ");
-            for(int i=0; i < n; i ++){
-                printf("%d ", weight[i]);
+            for(int i=0; i < n; i++){
+                printf("Valor do item %d: %d\n", i+1, itens[i].valor);
+                printf("Peso do item %d: %d\n", i+1, itens[i].peso);
             }
             printf("\n");
-            printf("Valores dos itens: ");
-            for(int i=0; i < n; i ++){
-                printf("%d ", profit[i]);
-            }
-            printf("\n\n");
 
-            int** tabela = tabela_mochila(W, weight, profit, n);
+            int** tabela = tabela_mochila(W, itens, n);
 
-            itens_usados(tabela, W, weight, profit, n);
+            itens_usados(tabela, W, itens, n);
             printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, n));
 
             return 0;
         }
         if(strcmp(argv[1], "teste_lcs") == 0){
             //teste longest common subsequence
+
             char* s3 = "ABCBDAB";
             char* s4 = "BDCABA";
 
@@ -262,42 +284,56 @@ int main(int argc, char* argv[]){
             }
             case 3: {
                 // Fractional Knapsack Problem
+
+                int capacidade, n;
+
+                printf("Digite a capacidade da mochila: ");
+                scanf("%d", &capacidade);
+
+                printf("Digite o número de itens: ");
+                scanf("%d", &n);
+
+                Item** itens = (Item**)malloc(sizeof(Item*) * n);
+                for (int i = 0; i < n; i++) {
+                    itens[i] = (Item*)malloc(sizeof(Item));
+                    printf("Digite o valor do item %d: ", i + 1);
+                    scanf("%d", &itens[i]->valor);
+                    printf("Digite o peso do item %d: ", i + 1);
+                    scanf("%d", &itens[i]->peso);
+                }
+                printf("\n");
+
+                Resultado** resultado = mochila_fracionaria(capacidade, itens, n);
+                imprimir_resultado_mochila_fracionaria(resultado, n);
                 break;
             }
             case 4: {
                 // Knapsack Problem
-                int n, W;
 
-                printf("\nDigite o número de itens: ");
-                scanf("%d", &n);
-
-                int* weight = (int*)malloc(n * sizeof(int));
-                int* profit = (int*)malloc(n * sizeof(int));
-
-                printf("Digite os pesos dos itens:\n");
-                for(int i = 0; i < n; i++){
-                    printf("Peso do item %d: ", i + 1);
-                    scanf("%d", &weight[i]);
-                }
-
-                printf("Digite os valores dos itens:\n");
-                for(int i = 0; i < n; i++){
-                    printf("Valor do item %d: ", i + 1);
-                    scanf("%d", &profit[i]);
-                }
+                int capacidade, n;
 
                 printf("Digite a capacidade da mochila: ");
-                scanf("%d", &W);
+                scanf("%d", &capacidade);
+
+                printf("Digite o número de itens: ");
+                scanf("%d", &n);
+
+                Item* itens = (Item*)malloc(sizeof(Item) * n);
+                for (int i = 0; i < n; i++) {
+                    printf("Digite o valor do item %d: ", i + 1);
+                    scanf("%d", &itens[i].valor);
+                    printf("Digite o peso do item %d: ", i + 1);
+                    scanf("%d", &itens[i].peso);
+                }
                 printf("\n");
 
-                int** tabela = tabela_mochila(W, weight, profit, n);
+                int** tabela = tabela_mochila(capacidade, itens, n);
 
-                itens_usados(tabela, W, weight, profit, n);
-                printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, n));
+                itens_usados(tabela, capacidade, itens, n);
+                printf("Maior valor: %d\n", maior_valor_mochila(tabela, capacidade, n));
 
-                destruir_matriz(tabela, n+1);
-                free(weight);
-                free(profit);
+                destruir_matriz(tabela, n + 1);
+                free(itens);
                 break;
             }
             case 5: {

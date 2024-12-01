@@ -1,10 +1,7 @@
 #ifndef MOCHILA_FRACIONARIA_H
 #define MOCHILA_FRACIONARIA_H
 
-typedef struct item{
-    int valor;
-    int peso;
-}Item;
+#include "../auxiliares/structs.h"
 
 typedef struct resultado{
     Item* item;

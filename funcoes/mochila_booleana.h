@@ -1,10 +1,7 @@
 #ifndef MOCHILA_BOOLEANA_H
 #define MOCHILA_BOOLEANA_H
 
-typedef struct item{
-    int valor;
-    int peso;
-}Item;
+#include "../auxiliares/structs.h"
 
 void destruir_matriz(int** matriz, int n);
 
