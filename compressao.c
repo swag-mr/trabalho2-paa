@@ -1,22 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define MAX_CHARS 256
-
-// Estrutura para o nó da árvore de Huffman
-typedef struct No {
-    char caractere;
-    int frequencia;
-    struct No *esquerda, *direita;
-} No;
-
-// Estrutura para a fila de prioridade (min heap)
-typedef struct MinHeap {
-    int tamanho;
-    int capacidade;
-    No** array;
-} MinHeap;
+#include "compressao.h"
 
 // Função para criar um novo nó da árvore
 No* criarNo(char caractere, int frequencia) {

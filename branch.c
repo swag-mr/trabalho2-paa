@@ -1,19 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
-
-#define N 4 // Número de tarefas e pessoas
-
-typedef struct {
-    int atribuicoes[N]; // Vetor indicando a tarefa atribuída a cada pessoa
-    int nivel;          // Nível do nó (número de pessoas atribuídas)
-    int custo;          // Custo acumulado
-} No;
+#include "branch.h"
 
 // Função para criar um novo nó
-No *criar_no(int atribuicoes[N], int nivel, int custo) {
+No *criar_no(int *atribuicoes, int n, int nivel, int custo) {
     No *novo = (No *)malloc(sizeof(No));
-    for (int i = 0; i < N; i++) {
+    novo->atribuicoes = (int*) malloc(n * sizeof(int));
+    for (int i = 0; i < n; i++) {
         novo->atribuicoes[i] = atribuicoes[i];
     }
     novo->nivel = nivel;
@@ -33,8 +27,8 @@ void inserir_ordenado(No **fila, int *tamanho, No *novo) {
 }
 
 // Função para verificar se uma tarefa já foi atribuída
-int tarefa_atribuida(int atribuicoes[N], int tarefa) {
-    for (int i = 0; i < N; i++) {
+int tarefa_atribuida(int *atribuicoes, int n, int tarefa) {
+    for (int i = 0; i < n; i++) {
         if (atribuicoes[i] == tarefa) {
             return 1; // Tarefa já atribuída
         }
@@ -43,12 +37,12 @@ int tarefa_atribuida(int atribuicoes[N], int tarefa) {
 }
 
 // Função para calcular o limite inferior
-int limite_inferior(int custo_atual, int matriz[N][N], int atribuicoes[N], int nivel) {
+int limite_inferior(int custo_atual, int **matriz, int n, int *atribuicoes, int nivel) {
     int custo_estimado = custo_atual;
-    for (int i = nivel; i < N; i++) {
+    for (int i = nivel; i < n; i++) {
         int min_custo = INT_MAX;
-        for (int j = 0; j < N; j++) {
-            if (!tarefa_atribuida(atribuicoes, j) && matriz[i][j] < min_custo) {
+        for (int j = 0; j < n; j++) {
+            if (!tarefa_atribuida(atribuicoes, n, j) && matriz[i][j] < min_custo) {
                 min_custo = matriz[i][j];
             }
         }
@@ -58,14 +52,14 @@ int limite_inferior(int custo_atual, int matriz[N][N], int atribuicoes[N], int n
 }
 
 // Função principal de Branch-and-Bound
-No *branch_and_bound(int matriz[N][N]) {
-    int atribuicoes[N];
-    for (int i = 0; i < N; i++) atribuicoes[i] = -1;
+No *branch_and_bound(int **matriz, int n) {
+    int atribuicoes[n];
+    for (int i = 0; i < n; i++) atribuicoes[i] = -1;
 
     No *fila[100]; // Fila de nós
     int tamanho_fila = 0;
 
-    inserir_ordenado(fila, &tamanho_fila, criar_no(atribuicoes, 0, 0));
+    inserir_ordenado(fila, &tamanho_fila, criar_no(atribuicoes, n, 0, 0));
 
     No *melhor_solucao = NULL;
     int melhor_custo = INT_MAX;
@@ -73,7 +67,7 @@ No *branch_and_bound(int matriz[N][N]) {
     while (tamanho_fila > 0) {
         No *atual = fila[--tamanho_fila];
 
-        if (atual->nivel == N) {
+        if (atual->nivel == n) {
             if (atual->custo < melhor_custo) {
                 melhor_custo = atual->custo;
                 if (melhor_solucao) free(melhor_solucao);
@@ -82,18 +76,18 @@ No *branch_and_bound(int matriz[N][N]) {
             continue;
         }
 
-        for (int j = 0; j < N; j++) {
-            if (!tarefa_atribuida(atual->atribuicoes, j)) {
+        for (int j = 0; j < n; j++) {
+            if (!tarefa_atribuida(atual->atribuicoes, n, j)) {
                 int custo_atual = atual->custo + matriz[atual->nivel][j];
                 if (custo_atual >= melhor_custo) continue;
 
-                int nova_atribuicao[N];
-                for (int k = 0; k < N; k++) nova_atribuicao[k] = atual->atribuicoes[k];
+                int nova_atribuicao[n];
+                for (int k = 0; k < n; k++) nova_atribuicao[k] = atual->atribuicoes[k];
                 nova_atribuicao[atual->nivel] = j;
 
-                int estimativa = limite_inferior(custo_atual, matriz, nova_atribuicao, atual->nivel + 1);
+                int estimativa = limite_inferior(custo_atual, matriz, n, nova_atribuicao, atual->nivel + 1);
                 if (estimativa < melhor_custo) {
-                    inserir_ordenado(fila, &tamanho_fila, criar_no(nova_atribuicao, atual->nivel + 1, custo_atual));
+                    inserir_ordenado(fila, &tamanho_fila, criar_no(nova_atribuicao, n, atual->nivel + 1, custo_atual));
                 }
             }
         }
@@ -103,20 +97,42 @@ No *branch_and_bound(int matriz[N][N]) {
 }
 
 int main() {
-    int matriz[N][N] = {
-        {9, 2, 7, 8},
-        {6, 4, 3, 7},
-        {5, 8, 1, 8},
-        {7, 6, 9, 4}
+    int **matriz = (int**) malloc(4 * sizeof(int*));
+    for(int i=0; i < 4; i++){
+        matriz[i] = (int*) malloc(4 * sizeof(int));
+    }
+
+    int valores[4][4] = {
+        {5, 5, 6, 9},
+        {3, 1, 4, 4},
+        {3, 5, 13, 3},
+        {3, 9, 14, 10}
     };
 
-    No *resultado = branch_and_bound(matriz);
+    for(int i = 0; i < 4; i++) {
+        for(int j = 0; j < 4; j++) {
+            matriz[i][j] = valores[i][j];
+        }
+    }   
+
+    No *resultado = branch_and_bound(matriz, 4);
     if (resultado) {
         printf("Solução ótima encontrada com custo: %d\n", resultado->custo);
-        printf("Atribuições:\n");
-        for (int i = 0; i < N; i++) {
-            printf("Pessoa %d -> Tarefa %d\n", i, resultado->atribuicoes[i]);
+        printf("\nAtribuições:\n");
+        for (int i = 0; i < 4; i++) {
+            printf("Pessoa %d -> Tarefa %d\n", i+1, resultado->atribuicoes[i]+1);
         }
+
+        printf("\nSolução em forma de vetor: [ ");
+        for(int i = 0; i < 4; i++){
+            if(i != 3){ // 3 = n - 1
+                printf("%d, ", resultado->atribuicoes[i]);
+            }else{
+                printf("%d ", resultado->atribuicoes[i]);
+            }
+        }
+        printf("]\n");
+
         free(resultado);
     } else {
         printf("Nenhuma solução encontrada.\n");
