@@ -6,7 +6,7 @@ int maxBooleana(int a, int b) {
     return (a > b) ? a : b;
 }
 
-void destruir_matriz(int** matriz, int n, int m){
+void destruir_matriz(int** matriz, int n){
     for(int i=0; i < n; i++){
         free(matriz[i]);
     }
@@ -48,7 +48,7 @@ void itens_usados(int **tabela, int capacidade, int* pesos, int* valores, int n)
     printf("\n");
 }
 
-int maior_valor_mochila(int **tabela, int capacidade, int* pesos, int* valores, int n){
+int maior_valor_mochila(int **tabela, int capacidade, int n){
     int maior = tabela[n][capacidade];
     return maior;
 }

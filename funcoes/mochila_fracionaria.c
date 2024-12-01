@@ -20,7 +20,6 @@ void swap(Item** a, Item** b) {
 
 int partition(Item** arr, int low, int high) {
     Item* p = arr[low];
-    Item* temp = NULL;
     int i = low;
     int j = high;
 
