@@ -115,6 +115,28 @@ int main(int argc, char* argv[]){
         }
         if(strcmp(argv[1], "teste_knapsack") == 0){
             //teste knapsack problem
+            int weight[] = { 6, 5, 8, 2, 3, 1 };
+            int profit[] = { 11, 9, 18, 6, 7, 3};
+            int W = 15;
+            int n = sizeof(profit) / sizeof(profit[0]);
+            
+            printf("\nCapacidade da mochila: %d\n", W);
+            printf("Quantidade de itens: %d\n", n);
+            printf("Peso dos itens: ");
+            for(int i=0; i < n; i ++){
+                printf("%d ", weight[i]);
+            }
+            printf("\n");
+            printf("Valores dos itens: ");
+            for(int i=0; i < n; i ++){
+                printf("%d ", profit[i]);
+            }
+            printf("\n\n");
+
+            int** tabela = tabela_mochila(W, weight, profit, n);
+
+            itens_usados(tabela, W, weight, profit, n);
+            printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, n));
 
             return 0;
         }
@@ -134,15 +156,15 @@ int main(int argc, char* argv[]){
             case 1: {
                 // Assignment Problem
 
-                int **matriz = (int**) malloc(4 * sizeof(int*));
-                for(int i=0; i < 4; i++){
-                    matriz[i] = (int*) malloc(4 * sizeof(int));
-                }
-
                 // Ler matriz
                 int n;
                 printf("Digite o tamanho N da matriz (NxN): ");
                 scanf("%d", &n);
+
+                int **matriz = (int**) malloc(n * sizeof(int*));
+                for(int i=0; i < n; i++){
+                    matriz[i] = (int*) malloc(n * sizeof(int));
+                }
 
                 for(int i=0; i < n; i++){
                     for(int j=0; j < n; j++){
@@ -225,6 +247,7 @@ int main(int argc, char* argv[]){
                 double taxa_compressao = ((double)tamanho_codificado / (8.0 * n)) * 100.0;
                 double taxa_reducao = 100.0 - taxa_compressao;
                 printf("\nTaxa de redução (em %%): %.2f\n", taxa_reducao);
+
                 printf("\nPressione Enter para continuar...");
                 getchar();
                 system("clear");
@@ -236,6 +259,38 @@ int main(int argc, char* argv[]){
             }
             case 4: {
                 // Knapsack Problem
+                int n, W;
+
+                printf("Digite o número de itens: ");
+                scanf("%d", &n);
+
+                int* weight = (int*)malloc(n * sizeof(int));
+                int* profit = (int*)malloc(n * sizeof(int));
+
+                printf("Digite os pesos dos itens:\n");
+                for(int i = 0; i < n; i++){
+                    printf("Peso do item %d: ", i + 1);
+                    scanf("%d", &weight[i]);
+                }
+
+                printf("Digite os valores dos itens:\n");
+                for(int i = 0; i < n; i++){
+                    printf("Valor do item %d: ", i + 1);
+                    scanf("%d", &profit[i]);
+                }
+
+                printf("Digite a capacidade da mochila: ");
+                scanf("%d", &W);
+                printf("\n");
+
+                int** tabela = tabela_mochila(W, weight, profit, n);
+
+                itens_usados(tabela, W, weight, profit, n);
+                printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, n));
+
+                destruir_matriz(tabela, n+1);
+                free(weight);
+                free(profit);
                 break;
             }
             case 5: {

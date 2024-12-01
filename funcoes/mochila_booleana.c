@@ -49,16 +49,3 @@ int maior_valor_mochila(int **tabela, int capacidade, int n){
     int maior = tabela[n][capacidade];
     return maior;
 }
-
-/* int main(){ */
-/*     int weight[] = { 6, 5, 8, 2, 3, 1 }; */
-/*     int profit[] = { 11, 9, 18, 6, 7, 3}; */
-/*     int W = 15; */
-/*     int n = sizeof(profit) / sizeof(profit[0]); */
-/*      */
-/*     int** tabela = tabela_mochila(W, weight, profit, n); */
-/*  */
-/*     itens_usados(tabela, W, weight, profit, n); */
-/*     printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, weight, profit, n)); */
-/*     return 0; */
-/* } */
