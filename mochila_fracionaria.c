@@ -1,15 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct item{
-    int valor;
-    int peso;
-}Item;
-
-typedef struct resultado{
-    Item* item;
-    double qtd;
-}Resultado;
+#include "mochila_fracionaria.h"
 
 int compara(Item* i1, Item* i2){
     double razao1 = (double)i1->valor / (double)i1->peso;

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "mochila_booleana.h"
 
 int max(int a, int b) {
     return (a > b) ? a : b;
