@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mochila_booleana.h"
-#include "util.h"
+#include "../auxiliares/util.h"
 
 void destruir_matriz(int** matriz, int n){
     for(int i=0; i < n; i++){

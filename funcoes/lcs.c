@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "lcs.h"
-#include "util.h"
+#include "../auxiliares/util.h"
 
 int tam_lcs(char *s1, char *s2, int m, int n){
     if(m == 0 || n == 0)

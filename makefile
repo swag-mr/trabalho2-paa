@@ -5,7 +5,8 @@ TARGET = main
 SRCS = main.c \
 	   funcoes/branch.c funcoes/compressao.c \
 	   funcoes/lcs.c funcoes/mochila_booleana.c \
-	   funcoes/mochila_fracionaria.c auxiliares/auxiliares.c
+	   funcoes/mochila_fracionaria.c auxiliares/auxiliares.c \
+	   auxiliares/util.c
 OBJS = $(SRCS:.c=.o)
 
 # Regra principal
