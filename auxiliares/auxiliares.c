@@ -20,3 +20,12 @@ void menuAssignmentProblem(){
 
     printf("\nSelecione a opção desejada: ");
 }
+
+void menuHuffman(){
+    printf("\n======== MENU CODIFICAÇÃO DE HUFFMAN ========\n\n");
+    printf("1 - Executar teste com string pré-programada\n");
+    printf("2 - Ler string\n");
+    printf("0 - Voltar\n");
+
+    printf("\nSelecione a opção desejada: ");
+}

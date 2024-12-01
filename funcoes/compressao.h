@@ -1,7 +1,7 @@
 #ifndef COMPRESSAO_H
 #define COMPRESSAO_H
 
-#define MAX_CHARS 1024
+#define MAX_CHARS 256
 
 // Estrutura para o nó da árvore de Huffman
 typedef struct No {
