@@ -10,7 +10,7 @@ void destruir_matriz(int** matriz, int n){
     free(matriz);
 }
 
-int** tabela_mochila(int capacidade, int* pesos, int* valores, int n){
+int** tabela_mochila(int capacidade, Item* itens, int n){
     int i, w;
     int** tabela = (int**)malloc(sizeof(int*)*(n+1));
     for(i=0; i <= n; i++){
@@ -21,8 +21,8 @@ int** tabela_mochila(int capacidade, int* pesos, int* valores, int n){
         for(w=0; w <= capacidade; w++){
             if(i == 0 || w == 0){
                 tabela[i][w] = 0;
-            }else if(pesos[i-1] <= w){
-                tabela[i][w] = max(valores[i-1] + tabela[i-1][w-pesos[i-1]], tabela[i-1][w]);
+            }else if(itens[i-1].peso <= w){
+                tabela[i][w] = max(itens[i-1].valor + tabela[i-1][w-itens[i-1].peso], tabela[i-1][w]);
             }else{
                 tabela[i][w] = tabela[i-1][w];
             }
@@ -32,14 +32,14 @@ int** tabela_mochila(int capacidade, int* pesos, int* valores, int n){
     return tabela;
 }
 
-void itens_usados(int **tabela, int capacidade, int* pesos, int* valores, int n){
+void itens_usados(int **tabela, int capacidade, Item *itens, int n){
     int line = n;
     int i = capacidade;
 
     printf("Itens usados: ");
     while (tabela[line][i] > 0){
-        printf("(%d, %d), ", valores[line-1], pesos[line-1]);
-        i = i - pesos[line-1];
+        printf("(%d, %d), ", itens[line-1].valor, itens[line-1].peso);
+        i = i - itens[line-1].peso;
         line--;
     }
     printf("\n");
@@ -49,3 +49,17 @@ int maior_valor_mochila(int **tabela, int capacidade, int n){
     int maior = tabela[n][capacidade];
     return maior;
 }
+
+/*
+int main(){
+    Item itens[] = { {11, 6}, {9, 5}, {18, 8}, {6, 2}, {7, 3}, {3, 1}};
+    int W = 15; 
+    int n = sizeof(itens) / sizeof(itens[0]);
+
+    int** tabela = tabela_mochila(W, itens, n);
+
+    itens_usados(tabela, W, itens, n);
+    printf("Maior valor: %d\n", maior_valor_mochila(tabela, W, n));
+    return 0;
+}
+*/
