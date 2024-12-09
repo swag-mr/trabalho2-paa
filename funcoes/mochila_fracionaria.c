@@ -85,11 +85,12 @@ void imprimir_resultado_mochila_fracionaria(Resultado** resultado, int n){
     double valor_final = 0.0;
     double qtd = 0.0;
 
+    printf("(valor, peso): quantidade\n");
     for(int i=0; i < n; i++){
         item = resultado[i]->item;
         qtd = resultado[i]->qtd;
         valor_final += qtd*item->valor;
-        printf("{%d - %d}: %.2f\n", item->valor, item->peso, qtd);
+        printf("(%d, %d): %.2f\n", item->valor, item->peso, qtd);
     }
     printf("\nValor final: %.2f\n", valor_final);
 }

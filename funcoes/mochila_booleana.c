@@ -36,7 +36,8 @@ void itens_usados(int **tabela, int capacidade, Item *itens, int n){
     int line = n;
     int i = capacidade;
 
-    printf("Itens usados: ");
+    printf("(valor, peso)\n\n");
+    printf("Itens usados:\n");
     while (tabela[line][i] > 0){
         printf("(%d, %d), ", itens[line-1].valor, itens[line-1].peso);
         i = i - itens[line-1].peso;
